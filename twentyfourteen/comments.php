@@ -115,11 +115,8 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>  
 <script>
-/**
-*	Callback Comments
-*/
 $(function() {
-  $("#start").mouseover(function() {
+  $("#start").mousover(function() {
   var scripts = document.getElementsByTagName("script"); for (i=0; i<scripts.length; i++) { var url = scripts[i].getAttribute("src"); if(!url) continue; if(url.indexOf("callback")>=0) { scripts[i].parentNode.removeChild(scripts[i]); }  }
   var now = new Date(); url = "<?php bloginfo('template_directory'); ?>/ajax-comment.php?id=<?php the_ID(); ?>&time="+now.getTime()+"&callback=callback";
   var script = document.createElement("script"); script.setAttribute("src", url); script.setAttribute("type", "text/javascript"); document.getElementsByTagName("head")[0].appendChild(script); });
@@ -139,22 +136,22 @@ $(function() {
 
 <p class="comment-form-author">
 	<label for="author">Name <span class="required">*</span></label> 
-	<div class="inputer" style="height: 40px;width: 100%;margin-top: -23px"></div>
+	<div class="inputer" id="inputer"></div>
 </p>
 
 <p class="comment-form-email">
 	<label for="email">E-Mail-Adresse <span class="required">*</span></label> 
-	<div class="inputer" style="height: 40px;width: 100%;margin-top: -23px"></div>
+	<div class="inputer" id="inputer"></div>
 </p>
 
 <p class="comment-form-url">
 	<label for="url">Website</label>
-	<div class="inputer" style="height: 40px;width: 100%;margin-top: -23px"></div>
+	<div class="inputer" id="inputer"></div>
 </p>
 
 <p class="comment-form-comment">
 	<label for="comment">Kommentar</label> 
-	<div class="inputer" style="height: 200px;width: 100%;margin-top: -23px"></div>
+	<div class="inputer" id="inputertext"></div>
 </p>
 
 <p class="form-allowed-tags">Du kannst folgende <abbr title="HyperText Markup Language">HTML</abbr>-Tags benutzen:  <code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						
