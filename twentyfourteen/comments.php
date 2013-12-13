@@ -11,23 +11,12 @@
  * @subpackage Twenty_Fourteen
  * @dev McCouman
  */
-?>
 
-<?php
-	/*
-	 * If the current post is protected by a password and
-	 * the visitor has not yet entered the password we will
-	 * return early without loading the comments.
-	 */
+
 	if ( post_password_required() )
 		return;
-		
-/**
-*   Callback: Kommentar erstellen
-*   -----------------------------
-*/
-//Wenn angemeldet == (Dann) gebe aus:
-if ( is_user_logged_in() ) { 
+
+	if ( is_user_logged_in() ) { 
 
 ?>
 	<div id="comments" class="comments-area">
@@ -124,52 +113,33 @@ if ( is_user_logged_in() ) {
 
 	<?php endif; // have_comments() ?>
 
-	<hr />
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>  
 <script>
 /**
 *	Callback Comments
 */
-(function() {
-
-$("#start").click(function() {
-
-  // Löschen bereits vorhandener JSONP Skripte
-  var scripts = document.getElementsByTagName("script");
-  for (i=0; i<scripts.length; i++) {
-    var url = scripts[i].getAttribute("src");
-    if(!url) continue;
-    if(url.indexOf("callback")>=0) {
-      scripts[i].parentNode.removeChild(scripts[i]);
-    }
-  }
-
-  // Anlegen und Einfügen des neuen Skripts
-  var now = new Date();
-  url = "<?php bloginfo('template_directory'); ?>/ajax-comment.php?id=<?php the_ID(); ?>&time="+now.getTime()+"&callback=callback";
-  
-  var script = document.createElement("script");
-  	script.setAttribute("src", url);
-  	script.setAttribute("type", "text/javascript");
-  	document.getElementsByTagName("head")[0].appendChild(script);
-	
-	
-	});
-});
-function callback(data) { 
-  document.getElementById("jsonp_antwort").innerHTML = data;
-}
+$(function() {
+  $("#start").mouseover(function() {
+  var scripts = document.getElementsByTagName("script"); for (i=0; i<scripts.length; i++) { var url = scripts[i].getAttribute("src"); if(!url) continue; if(url.indexOf("callback")>=0) { scripts[i].parentNode.removeChild(scripts[i]); }  }
+  var now = new Date(); url = "<?php bloginfo('template_directory'); ?>/ajax-comment.php?id=<?php the_ID(); ?>&time="+now.getTime()+"&callback=callback";
+  var script = document.createElement("script"); script.setAttribute("src", url); script.setAttribute("type", "text/javascript"); document.getElementsByTagName("head")[0].appendChild(script); });
+}); function callback(data) { document.getElementById("jsonp_antwort").innerHTML = data; }
 </script>
+
+<form action="<?php bloginfo('template_directory'); ?>/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+
 <div id="respond" class="comment-respond">
   <h3 id="reply-title" class="comment-reply-title">Hinterlasse eine Antwort <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2013/10/podunion-laed-zur-plauderstunde-ein/#respond" style="display:none;">Antworten abbrechen</a></small></h3>
 
 <div id="jsonp_antwort">
+<div id="start">
 <div id="commentform" class="comment-form">
+
 <p class="comment-notes">Deine E-Mail-Adresse wird nicht veröffentlicht. Erforderliche Felder sind markiert <span class="required">*</span></p>
 
 <p class="comment-form-author">
 	<label for="author">Name <span class="required">*</span></label> 
-	<div class="inputer" id="start" style="height: 40px;width: 100%;margin-top: -23px"></div>
+	<div class="inputer" style="height: 40px;width: 100%;margin-top: -23px"></div>
 </p>
 
 <p class="comment-form-email">
@@ -194,7 +164,8 @@ function callback(data) {
 </p>
 </div>
 </div>
-
+</div>
+</form>
 	</div>
 </div><!-- #comments .comments-area -->
 <?php } ?>
