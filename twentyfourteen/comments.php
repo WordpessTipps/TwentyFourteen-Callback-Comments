@@ -9,6 +9,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Fourteen
+ * @dev McCouman
  */
 ?>
 
@@ -80,11 +81,7 @@ if ( is_user_logged_in() ) {
 
 	<?php comment_form(); ?>
 </div><!-- #comments .comments-area -->
-
-
-
 <?php 
-//Wenn nicht angemeldet !== Dann gebe aus:
 } else { ?>
 <div id="comments" class="comments-area">
 
@@ -129,12 +126,11 @@ if ( is_user_logged_in() ) {
 
 	<hr />
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script>
 /**
 *	Callback Comments
 */
-$(function() {
+(function() {
 
 $("#start").click(function() {
 
@@ -160,16 +156,12 @@ $("#start").click(function() {
 	
 	});
 });
-//---------------------------- Entgegennahme der Serverantwort
 function callback(data) { 
   document.getElementById("jsonp_antwort").innerHTML = data;
 }
 </script>
-	
-	<div id="respond" class="comment-respond">
-		<h3 id="reply-title" class="comment-reply-title">Hinterlasse eine Antwort <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2013/10/podunion-laed-zur-plauderstunde-ein/#respond" style="display:none;">Antworten abbrechen</a></small></h3>
-
-
+<div id="respond" class="comment-respond">
+  <h3 id="reply-title" class="comment-reply-title">Hinterlasse eine Antwort <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2013/10/podunion-laed-zur-plauderstunde-ein/#respond" style="display:none;">Antworten abbrechen</a></small></h3>
 
 <div id="jsonp_antwort">
 <div id="commentform" class="comment-form">
