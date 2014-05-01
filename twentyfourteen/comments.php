@@ -113,14 +113,12 @@
 
 	<?php endif; // have_comments() ?>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>  
 <script>
-$(function() {
-  $("#start").mouseover(function() {
+(function() { jQuery("#start").mouseover(function() {
   var scripts = document.getElementsByTagName("script"); for (i=0; i<scripts.length; i++) { var url = scripts[i].getAttribute("src"); if(!url) continue; if(url.indexOf("callback")>=0) { scripts[i].parentNode.removeChild(scripts[i]); }  }
   var now = new Date(); url = "<?php bloginfo('template_directory'); ?>/ajax-comment.php?id=<?php the_ID(); ?>&time="+now.getTime()+"&callback=callback";
   var script = document.createElement("script"); script.setAttribute("src", url); script.setAttribute("type", "text/javascript"); document.getElementsByTagName("head")[0].appendChild(script); });
-}); function callback(data) { document.getElementById("jsonp_antwort").innerHTML = data; }
+})(jQuery); function callback(data) { document.getElementById("jsonp_antwort").innerHTML = data; }
 </script>
 
 <form action="<?php bloginfo('template_directory'); ?>/wp-comments-post.php" method="post" id="commentform" class="comment-form">
